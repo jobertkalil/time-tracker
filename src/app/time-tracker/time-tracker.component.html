@@ -1,0 +1,53 @@
+<div
+  class="container px-0 mx-0 my-3 pt-sm-0 pt-md-3 container-full"
+  *ngIf="user"
+>
+  <div class="row">
+    <div class="col-12">
+      <div class="card px-3">
+        <div class="card-body pb-4">
+          <div class="row">
+            <div class="col">
+              <h5 class="card-title">{{ lang.get("timeTrackerTitle") }}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-3 mb-2 mb-md-0 d-flex align-items-center">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="totalHours"
+                  [(ngModel)]="document.data.totalHours"
+                  [placeholder]="lang.get('totalHours')"
+                />
+                <span class="input-group-text" id="basic-addon2">
+                  {{ parserService.formatTimeUnit(document) }}
+                </span>
+              </div>
+            </div>
+            <div class="col-12 col-md-3 mb-2 mb-md-0 d-flex align-items-center">
+              <app-tag-typeahead
+                [document]="document"
+                [placeholder]="lang.get('tag')"
+                class="w-100"
+              ></app-tag-typeahead>
+            </div>
+            <div class="col-12 col-md-4 mb-2 mb-md-0 d-flex align-items-center">
+              <app-activity-typeahead
+                [document]="document"
+                [placeholder]="lang.get('activity')"
+                class="w-100"
+              ></app-activity-typeahead>
+            </div>
+            <div class="col-12 col-md-2 mb-2 mb-md-0 text-center">
+              <button class="btn btn-success btn-circle" (click)="submit()">
+                <i class="bi bi-plus-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

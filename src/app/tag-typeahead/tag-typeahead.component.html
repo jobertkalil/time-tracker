@@ -1,0 +1,12 @@
+<div class="input-group">
+  <span class="input-group-text">
+    <i class="bi bi-hash"></i>
+  </span>
+  <input
+    type="text"
+    class="form-control"
+    [(ngModel)]="document.data.tag"
+    [ngbTypeahead]="search"
+    [placeholder]="placeholder"
+  />
+</div>

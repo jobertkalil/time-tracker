@@ -1,0 +1,19 @@
+<div *ngIf="auth.user$ | async as user">
+  <app-navigation [user]="user"></app-navigation>
+  <div class="row mx-2">
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <app-tags-chart [user]="user" [role]="user.role"></app-tags-chart>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <app-user-hours-list
+        [user]="user"
+        [role]="user.role"
+      ></app-user-hours-list>
+    </div>
+  </div>
+  <div class="row mx-2">
+    <div class="col-12">
+      <app-time-log [user]="user" [role]="user.role"></app-time-log>
+    </div>
+  </div>
+</div>

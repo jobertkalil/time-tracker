@@ -1,0 +1,148 @@
+<div class="container container-full py-md-3 px-0 mb-3 mb-md-0">
+  <div class="card px-3">
+    <div class="card-header card-background">
+      <div class="row mt-2">
+        <div class="col">
+          <h5 class="card-title">{{ lang.get("timeLogTitle") }}</h5>
+        </div>
+      </div>
+      <div class="row pb-2">
+        <div class="col-12 col-md-3">
+          <div class="form-group mb-3 d-flex">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchTag"
+              (input)="searchRecords()"
+              [placeholder]="lang.get('tag')"
+            />
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="form-group mb-3 d-flex">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="searchActivity"
+              (input)="searchRecords()"
+              [placeholder]="lang.get('activity')"
+            />
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="form-group">
+            <input
+              type="text"
+              [placeholder]="lang.get('date')"
+              class="form-control"
+              bsDatepicker
+              (bsValueChange)="handleDateChange($event)"
+              [bsConfig]="{ adaptivePosition: true }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body py-0 card-scrollable">
+      <ul class="list-group list-group-flush">
+        <li
+          class="list-group-item d-flex px-0"
+          aria-current="true"
+          *ngFor="
+            let log of logs
+              | slice
+                : (currentPage - 1) * itemsPerPage
+                : currentPage * itemsPerPage
+          "
+        >
+          <div class="col-2 align-self-center px-0 px-md-3">
+            <p class="fs-6 mb-0">
+              {{
+                log.data.totalHours + " " + parserService.formatTimeUnit(log)
+              }}
+            </p>
+          </div>
+          <div class="col-8">
+            <p
+              *ngIf="user.role && user.role == 'admin'"
+              class="fw-normal fs-6 mb-0 fw-bold"
+            >
+              {{ log.displayName }}
+            </p>
+            <p class="font-monospace fs-6 mb-0">#{{ log.data.tag }}</p>
+            <p class="fw-normal fs-6 mb-0">{{ log.data.activity }}</p>
+            <p class="fs-6 mb-0">{{ parserService.formatCreatedDate(log) }}</p>
+          </div>
+          <div class="col-2 align-self-center px-0 px-md-3">
+            <button
+              type="button"
+              class="btn btn-icon"
+              (click)="archiveLog(log)"
+            >
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="card-footer card-background">
+      <div class="row">
+        <div class="col-12 col-md-2 mt-2 mt-md-2">
+          <div class="form-group mb-3 d-flex justify-content-center">
+            <label for="rows" class="align-self-center mx-3 my-0">
+              {{ lang.get("rows") }}
+            </label>
+            <select
+              id="rows"
+              class="form-select form-select-sm"
+              [(ngModel)]="itemsPerPage"
+              (change)="setTotalPage()"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-md-8 d-flex justify-content-center mt-0 mt-md-2">
+          <nav>
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="currentPage = 1">
+                  {{ lang.get("first") }}
+                </a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="currentPage = currentPage - 1">
+                  {{ lang.get("previous") }}
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link">{{ currentPage }}</a>
+              </li>
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPages"
+              >
+                <a class="page-link" (click)="currentPage = currentPage + 1">
+                  {{ lang.get("next") }}
+                </a>
+              </li>
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPages"
+              >
+                <a class="page-link" (click)="currentPage = totalPages">
+                  {{ lang.get("last") }}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+  </div>
+</div>

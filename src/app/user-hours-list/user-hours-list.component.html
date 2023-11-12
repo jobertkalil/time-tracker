@@ -1,0 +1,112 @@
+<div class="container py-md-3 px-0 mb-3 mb-md-0">
+  <div class="card px-3 card-min-height-half">
+    <div class="card-body card-chart">
+      <div class="row">
+        <div class="col">
+          <h5 class="card-title">{{ lang.get("userHoursTitle") }}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-7 form-group mb-3">
+          <input
+            type="text"
+            [placeholder]="lang.get('dateRange')"
+            class="form-control"
+            bsDaterangepicker
+            (bsValueChange)="handleDateChange($event)"
+            [bsConfig]="{ adaptivePosition: true }"
+            [bsValue]="dateRange"
+          />
+        </div>
+        <div class="col-12 col-md-5">
+          <div class="input-group">
+            <span class="input-group-text" id="basic-addon2"> >= </span>
+            <input
+              type="text"
+              class="form-control"
+              id="hourReq"
+              [(ngModel)]="hourReq"
+              [placeholder]="lang.get('hourReq')"
+            />
+            <span class="input-group-text" id="basic-addon2">
+              {{ parserService.formatStringTimeUnit(hourReq) }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item d-flex px-0"
+              aria-current="true"
+              *ngFor="
+                let userHour of userHours
+                  | slice
+                    : (currentPage - 1) * itemsPerPage
+                    : currentPage * itemsPerPage
+              "
+            >
+              <div class="col-3 align-self-center px-0 px-md-3">
+                <p class="fs-6 mb-0">
+                  {{
+                    userHour.totalHours +
+                      " " +
+                      parserService.formatStringTimeUnit(userHour.totalHours)
+                  }}
+                </p>
+              </div>
+              <div class="col-9">
+                <p class="fw-normal fs-6 mb-0">
+                  {{
+                    userHour.displayName ??
+                      userHour.firstName + " " + userHour.lastName
+                  }}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer card-background">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <nav>
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="currentPage = 1">
+                  {{ lang.get("first") }}
+                </a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="currentPage = currentPage - 1">
+                  {{ lang.get("previous") }}
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link">{{ currentPage }}</a>
+              </li>
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPages"
+              >
+                <a class="page-link" (click)="currentPage = currentPage + 1">
+                  {{ lang.get("next") }}
+                </a>
+              </li>
+              <li
+                class="page-item"
+                [class.disabled]="currentPage === totalPages"
+              >
+                <a class="page-link" (click)="currentPage = totalPages">
+                  {{ lang.get("last") }}
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

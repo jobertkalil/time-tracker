@@ -1,0 +1,80 @@
+<div class="container py-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">{{ lang.get("portalTitle") }}</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group mb-3">
+              <label for="firstName">{{ lang.get("firstName") }}</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                [(ngModel)]="user.firstName"
+                [ngModelOptions]="{ standalone: true }"
+                [placeholder]="lang.get('firstName')"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                [(ngModel)]="user.lastName"
+                [ngModelOptions]="{ standalone: true }"
+                [placeholder]="lang.get('lastName')"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="email">{{ lang.get("email") }}</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                [(ngModel)]="user.email"
+                [ngModelOptions]="{ standalone: true }"
+                [placeholder]="lang.get('email')"
+              />
+            </div>
+            <div class="form-group mb-3">
+              <label for="password">{{ lang.get("password") }}</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                [(ngModel)]="user.password"
+                [ngModelOptions]="{ standalone: true }"
+                [placeholder]="lang.get('password')"
+              />
+            </div>
+            <div class="mb-3 text-center">
+              <button type="submit" class="btn btn-primary" (click)="signUp()">
+                {{ lang.get("signUp") }}
+              </button>
+            </div>
+            <div class="container">
+              <p class="text-center small fw-light">
+                {{ lang.get("accountExisting") }}
+                <a [routerLink]="['/']">{{ lang.get("login") }}</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-center">
+  <p class="small fw-light">{{ lang.get("or") }}</p>
+</div>
+<div class="text-center">
+  <button class="btn google-button" (click)="auth.GoogleAuth()">
+    <img
+      src="assets/sign-in-with-google.png"
+      alt="Google Logo"
+      class="google-logo"
+    />
+  </button>
+</div>

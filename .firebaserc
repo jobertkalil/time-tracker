@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "time-tracker-b20f2": {
+      "hosting": {
+        "time-tracker-frontend": [
+          "time-tracker-b20f2"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "time-tracker-b20f2"
+  }
+}

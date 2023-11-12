@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "time-tracker-frontend",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

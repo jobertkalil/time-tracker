@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  padding: 0px;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.card-scrollable {
+  max-height: 45vh;
+  overflow-y: auto;
+}
+
+.card-min-height-half {
+  min-height: 530px;
+}
+
+.card-background {
+  background-color: var(--bs-card-bg);
+}
+
+.card-chart {
+  margin-bottom: 12rem;
+}
+
+.card-chart .legend-labels {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-full {
+  max-width: 100%;
+}

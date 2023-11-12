@@ -1,0 +1,77 @@
+<!-- User NOT logged in -->
+<div *ngIf="userState === 1">
+  <div class="container py-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center">
+            {{ lang.get("portalTitle") }}
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  [(ngModel)]="email"
+                  [ngModelOptions]="{ standalone: true }"
+                  [placeholder]="lang.get('email')"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  [(ngModel)]="password"
+                  [ngModelOptions]="{ standalone: true }"
+                  [placeholder]="lang.get('password')"
+                />
+              </div>
+
+              <!-- Error Message -->
+              <div
+                class="alert alert-danger"
+                *ngIf="invalidCredentials && errorMessage"
+              >
+                {{ errorMessage }}
+              </div>
+
+              <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-primary" (click)="login()">
+                  {{ lang.get("login") }}
+                </button>
+              </div>
+              <div class="container">
+                <p class="text-center small fw-light">
+                  {{ lang.get("noAccount") }}
+                  <a [routerLink]="['/signup']">{{ lang.get("signUp") }}</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <p class="small fw-light">
+      {{ lang.get("or") }}
+    </p>
+  </div>
+  <div class="text-center">
+    <button class="btn google-button" (click)="auth.GoogleAuth()">
+      <img
+        src="assets/sign-in-with-google.png"
+        alt="Google Logo"
+        class="google-logo"
+      />
+    </button>
+  </div>
+</div>
+
+<!-- User logged in -->
+<div *ngIf="userState === 2">
+  <app-dashboard></app-dashboard>
+</div>

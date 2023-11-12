@@ -1,0 +1,42 @@
+<div class="container py-md-3 px-0 mb-3 mb-md-0">
+  <div class="card px-3 card-min-height-half">
+    <div class="card-body card-chart">
+      <div class="row">
+        <div class="col">
+          <h5 class="card-title">{{ lang.get("tagsChartTitle") }}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 form-group mb-3">
+          <input
+            type="text"
+            [placeholder]="lang.get('dateRange')"
+            class="form-control"
+            bsDaterangepicker
+            (bsValueChange)="handleDateChange($event)"
+            [bsConfig]="{ adaptivePosition: true }"
+            [bsValue]="dateRange"
+          />
+        </div>
+        <div class="col-2">
+          <button
+            class="btn btn-icon"
+            type="button"
+            (click)="getLogsFromRange()"
+          >
+            <i class="bi bi-arrow-clockwise"></i>
+          </button>
+        </div>
+      </div>
+      <ngx-charts-pie-chart
+        *ngIf="dataLoaded"
+        [results]="chartData"
+        [view]="view"
+        [legend]="pieChartOptions.showLegend"
+        [legendPosition]="pieChartOptions.legendPosition"
+        [animations]="pieChartOptions.animations"
+      >
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+</div>

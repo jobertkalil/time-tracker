@@ -1,0 +1,16 @@
+<div *ngIf="auth.user$ | async as user">
+  <app-navigation [user]="user"></app-navigation>
+  <div class="row mx-2">
+    <div class="col-12">
+      <app-time-tracker [user]="user"></app-time-tracker>
+    </div>
+  </div>
+  <div class="row mx-2">
+    <div class="col-sm-12 col-md-12 col-lg-7">
+      <app-time-log [user]="user"></app-time-log>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-5">
+      <app-tags-chart [user]="user"></app-tags-chart>
+    </div>
+  </div>
+</div>
